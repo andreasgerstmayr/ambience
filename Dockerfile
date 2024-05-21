@@ -1,5 +1,5 @@
 # build
-FROM docker.io/library/node:20-alpine AS builder
+FROM docker.io/library/node:22-alpine AS builder
 ENV NODE_ENV production
 WORKDIR /usr/src/app
 
@@ -9,7 +9,7 @@ COPY . .
 RUN npm run build
 
 # runtime
-FROM docker.io/library/node:20-alpine
+FROM docker.io/library/node:22-alpine
 ENV NODE_ENV production
 WORKDIR /usr/src/app
 
