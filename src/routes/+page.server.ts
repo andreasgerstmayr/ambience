@@ -10,7 +10,8 @@ export const load: PageServerLoad = async () => {
   try {
     images = await getImmichAlbums();
   } catch (e) {
-    throw error(500, (e as object).toString());
+    console.error(e);
+    throw error(500, 'could not fetch images. please check server logs.');
   }
 
   const slides = prepareSlides(images);
