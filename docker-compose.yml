@@ -1,0 +1,9 @@
+services:
+  ambience:
+    image: ghcr.io/andreasgerstmayr/ambience
+    environment:
+      IMMICH_HOST: https://immich.local
+      IMMICH_API_KEY: <secret>
+      IMMICH_ALBUMS: Slideshow
+    ports:
+      - 3000:3000
