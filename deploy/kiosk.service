@@ -1,0 +1,11 @@
+[Unit]
+Description=Chromium Kiosk
+Requires=network-online.target
+After=network-online.target
+After=systemd-user-sessions.service plymouth-quit-wait.service
+
+[Service]
+ExecStart=/usr/bin/xinit /home/pi/kiosk.sh
+
+[Install]
+WantedBy=default.target

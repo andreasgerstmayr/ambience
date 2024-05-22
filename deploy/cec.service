@@ -1,0 +1,12 @@
+[Unit]
+Description=Kiosk CEC
+Requires=dev-cec0.device
+After=dev-cec0.device
+
+[Service]
+User=pi
+Group=pi
+ExecStart=/home/pi/cec.sh
+
+[Install]
+WantedBy=default.target
