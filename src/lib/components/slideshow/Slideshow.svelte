@@ -15,6 +15,12 @@
     if (interval) return;
 
     interval = setInterval(() => {
+      if (index + 1 === slides.length) {
+        // refresh page after last slide to reload and shuffle images from album
+        location.reload();
+        return;
+      }
+
       index = (index + 1) % slides.length;
     }, duration * 1000);
   }
