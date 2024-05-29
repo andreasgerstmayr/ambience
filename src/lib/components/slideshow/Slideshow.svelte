@@ -40,16 +40,21 @@
     };
   });
 
+  // modulo with negative numbers
+  function mod(i: number, n: number) {
+    return ((i % n) + n) % n;
+  }
+
   function onKeyDown(e: KeyboardEvent) {
     switch (e.code) {
       case 'ArrowLeft':
         pause();
-        index--;
+        index = mod(index - 1, slides.length);
         break;
 
       case 'ArrowRight':
         pause();
-        index++;
+        index = (index + 1) % slides.length;
         break;
 
       case 'Space':
