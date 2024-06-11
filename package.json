@@ -17,7 +17,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@immich/sdk": "^1.105.1",
+    "@immich/sdk": "^1.106.2",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
