@@ -39,7 +39,7 @@ function isLandscape(exif?: ExifResponseDto) {
 
 function assetToImage(asset: AssetResponseDto): SlideImage {
   return {
-    src: `${IMMICH_HOST}/api/asset/file/${asset.id}?isThumb=false&isWeb=true&apiKey=${IMMICH_API_KEY}`,
+    src: `${IMMICH_HOST}/api/assets/${asset.id}/thumbnail?size=preview&apiKey=${IMMICH_API_KEY}`,
     location: getLocation(asset.exifInfo),
     date: new Date(asset.localDateTime),
     isLandscape: isLandscape(asset.exifInfo)
