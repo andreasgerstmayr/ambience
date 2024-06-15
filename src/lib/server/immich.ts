@@ -1,10 +1,12 @@
 import { error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import {
+  AssetMediaSize,
   AssetTypeEnum,
-  defaults,
   getAlbumInfo,
   getAllAlbums,
+  getAssetThumbnailPath,
+  init,
   type AssetResponseDto,
   type ExifResponseDto
 } from '@immich/sdk';
@@ -38,8 +40,10 @@ function isLandscape(exif?: ExifResponseDto) {
 }
 
 function assetToImage(asset: AssetResponseDto): SlideImage {
+  const params = new URLSearchParams({ size: AssetMediaSize.Preview, apiKey: IMMICH_API_KEY });
+  const src = `${IMMICH_HOST}/api${getAssetThumbnailPath(asset.id)}?${params}`;
   return {
-    src: `${IMMICH_HOST}/api/assets/${asset.id}/thumbnail?size=preview&apiKey=${IMMICH_API_KEY}`,
+    src,
     location: getLocation(asset.exifInfo),
     date: new Date(asset.localDateTime),
     isLandscape: isLandscape(asset.exifInfo)
@@ -57,8 +61,7 @@ export async function getImmichAlbums(): Promise<SlideImage[]> {
     throw error(500, 'Please set the IMMICH_ALBUMS environment variable.');
   }
 
-  defaults.baseUrl = `${IMMICH_HOST}/api`;
-  defaults.headers = { 'x-api-key': IMMICH_API_KEY };
+  init({ baseUrl: `${IMMICH_HOST}/api`, apiKey: IMMICH_API_KEY });
 
   const albumNames = IMMICH_ALBUMS.split(',');
   const allAlbums = await getAllAlbums({});
